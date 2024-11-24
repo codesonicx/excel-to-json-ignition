@@ -1,0 +1,2029 @@
+{
+  "name": "AlarmsDINT2",
+  "tagType": "UdtType",
+  "tags": [
+    {
+      "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "ns\u003d1;s\u003d[test][Amazon]/{OPCParentPath}.[{InstanceName}]"
+      },
+      "valueSource": "memory",
+      "dataType": "Int4",
+      "name": "OPC_DINT",
+      "value": 0,
+      "tagType": "AtomicTag",
+      "opcServer": "Ignition OPC UA Server"
+    },
+    {
+      "name": "pathResolver",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "valueSource": "expr",
+          "expression": "concat({[.]pathMainFolder},\"/alarmCommParams/alarmCfg/\")",
+          "dataType": "String",
+          "name": "pathAlarmCfg",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "substring({[.]pathParentFolder}, 0, lastIndexOf({[.]pathParentFolder}, \"/\"))",
+          "dataType": "String",
+          "name": "pathMainFolder",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "replace({PathToParentFolder},concat(\"/\",{InstanceName},\"/pathResolver\"),\"\")",
+          "dataType": "String",
+          "name": "pathParentFolder",
+          "executionMode": "EventDriven",
+          "value": "replace(\"XYZ\", \"Y\", \"and\")",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "tag(concat({[.]pathAlarmCfg},{TagName}))",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "area",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "tag(concat({[.]pathAlarmCfg},{TagName}))",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "deviceDescription",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "tag(concat({[.]pathAlarmCfg},{TagName}))",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "deviceType",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "replace(\r\n\treplace(\r\n\t\tconcat(\r\n\t\t\treplace({[.]pathParentFolder},\"/\",\".\")\r\n\t\t\t,\".\",{InstanceName})\r\n\t\t,\"(\", \"[\")\r\n\t, \")\", \"]\")",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "rawTag",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "tag(concat({[.]pathAlarmCfg},{TagName}))",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "plc",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "tag(concat({[.]pathAlarmCfg},{TagName}))",
+          "dataType": "String",
+          "sourceTagPath": "[.]deviceDescriptionPath",
+          "name": "location",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "replace({[.]rawTag},concat(\"Remote.Controller.\",{[.]controllerName},\".\"),\"\")",
+          "dataType": "String",
+          "name": "tag",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "substring(replace({[.]rawTag}, \"Remote.Controller.\", \"\"), 0, indexOf(replace({[.]rawTag}, \"Remote.Controller.\", \"\"), \".\"))",
+          "dataType": "String",
+          "name": "controllerName",
+          "tagType": "AtomicTag"
+        }
+      ]
+    },
+    {
+      "name": "bits",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 16384) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "14",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/14_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/14_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "14",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 4194304) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "22",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/22_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/22_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "22",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 8388608) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "23",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/23_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/23_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "23",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 8192) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "13",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/13_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/13_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "13",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 2147483648) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "31",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/31_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/31_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "31",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 1) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "0",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/0_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/0_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "0",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 65536) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "16",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/16_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/16_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "16",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 2097152) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "21",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/21_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/21_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "21",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 268435456) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "28",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/28_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/28_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "28",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 64) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "6",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/6_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/6_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "6",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 2048) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "11",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/11_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/11_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "11",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 536870912) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "29",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/29_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/29_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "29",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 128) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "7",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/7_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/7_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "7",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 4096) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "12",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/12_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/12_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "12",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 8) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "3",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/3_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/3_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "3",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 1024) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "10",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/10_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/10_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "10",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 134217728) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "27",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/27_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/27_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "27",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 1048576) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "20",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/20_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/20_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "20",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 131072) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "17",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/17_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/17_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "17",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 4) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "2",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/2_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/2_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "2",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 33554432) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "25",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/25_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/25_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "25",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 524288) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "19",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/19_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/19_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "19",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 512) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "9",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/9_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/9_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "9",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 67108864) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "26",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/26_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/26_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "26",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 16) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "4",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/4_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/4_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "4",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 1073741824) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "30",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/30_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/30_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "30",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 262144) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "18",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/18_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/18_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "18",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 32768) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "15",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/15_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/15_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "15",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 32) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "5",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/5_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/5_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "5",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 2) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "1",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/1_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/1_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "1",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 256) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "8",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/8_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/8_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "8",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "expr",
+          "expression": "({[.]../OPC_DINT} \u0026 16777216) \u003e 0",
+          "dataType": "Boolean",
+          "alarms": [
+            {
+              "setpointA": 1.0,
+              "name": "24",
+              "area": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/area"
+              },
+              "plc": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/plc"
+              },
+              "description": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/24_description"
+              },
+              "alarmName": {
+                "bindType": "Tag",
+                "value": "[.]../bitsDescription/24_name"
+              },
+              "location": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/location"
+              },
+              "tag": {
+                "bindType": "Expression",
+                "value": "concat({[.]../pathResolver/tag},\".\",{TagName})"
+              },
+              "deviceType": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceType"
+              },
+              "deviceDescription": {
+                "bindType": "Tag",
+                "value": "[.]../pathResolver/deviceDescription"
+              }
+            }
+          ],
+          "name": "24",
+          "tagType": "AtomicTag"
+        }
+      ]
+    },
+    {
+      "name": "bitsDescription",
+      "tagType": "Folder",
+      "tags": [
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "30_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "2_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "17_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "17_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "31_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "8_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "19_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "13_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "1_name",
+          "value": "",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "27_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "0_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "27_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "12_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "11_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "13_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "0_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "31_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "25_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "15_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "25_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "20_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "28_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "22_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "19_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "4_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "5_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "4_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "9_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "18_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "12_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "16_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "10_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "26_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "3_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "22_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "10_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "16_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "21_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "23_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "7_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "20_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "5_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "3_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "11_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "24_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "6_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "18_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "28_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "30_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "14_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "2_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "9_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "7_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "26_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "1_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "29_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "23_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "21_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "8_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "24_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "15_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "6_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "29_name",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        },
+        {
+          "valueSource": "memory",
+          "dataType": "String",
+          "name": "14_description",
+          "value": "PLACE HOLDER",
+          "tagType": "AtomicTag"
+        }
+      ]
+    },
+    {
+      "opcItemPath": {
+        "bindType": "parameter",
+        "binding": "replace({PathToParentFolder},\"/\",\".\")"
+      },
+      "valueSource": "expr",
+      "expression": "{[.]cfg/pathParentFolder}.{TagName}",
+      "dataType": "String",
+      "name": "OPC_DINT_Test",
+      "tagType": "AtomicTag",
+      "opcServer": "Ignition OPC UA Server"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+.venv/
+resources/*
+!resources/
+src/__pycache__/
+
+data/output/*
+!data/output/
+data/processed/*
+!data/processed/
+
+# to do create a notebook in conditions to explain the code
+# when finish remove this line and comment
+notebooks/

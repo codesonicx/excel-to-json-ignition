@@ -3,6 +3,8 @@ resources/*
 !resources/
 src/__pycache__/
 
+data/input/*
+!data/input/
 data/output/*
 !data/output/
 data/processed/*

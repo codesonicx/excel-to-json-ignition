@@ -5,7 +5,7 @@ from folder_structure_builder import build_folder_structure
 from json_writer import write_json_to_file
 
 # Step 1: Process the Excel file
-file_path = r"resources\alarms.xlsx"
+file_path = r"data\input\Alarms.xlsx"
 df = process_excel(file_path)
 
 # Step 2: Group the DataFrame by 'Prefix'
